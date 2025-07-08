@@ -83,3 +83,4 @@ Then visit `http://127.0.0.1:5000` in your browser.
 - Recall: 95.5%
 
 
+![Build](https://github.com/Murali-ux07/Cyber_Threat_Detection_using_LSTM/actions/workflows/python-lint.yml/badge.svg)
