@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Threat Detection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+    body {
+      background: #0f172a;
+      color: #f8fafc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #1e293b;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      max-width: 500px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 1.8rem;
+    }
+    textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 8px;
+      border: none;
+      resize: vertical;
+      font-size: 1rem;
+      background: #334155;
+      color: #f8fafc;
+    }
+    button {
+      width: 100%;
+      padding: 0.8rem;
+      margin-top: 1rem;
+      border: none;
+      border-radius: 8px;
+      background: #3b82f6;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #0f172a;
+      border-radius: 8px;
+      border: 1px solid #334155;
+    }
+    .label {
+      font-weight: bold;
+      color: #38bdf8;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cyber Threat Detector</h1>
+    <textarea id="inputText" rows="5" placeholder="Enter text describing a possible cyber threat..."></textarea>
+    <button onclick="predictThreat()">Analyze</button>
+    <div class="result" id="resultBox" style="display: none;">
+      <p><span class="label">Prediction:</span> <span id="prediction"></span></p>
+      <p><span class="label">Confidence:</span> <span id="confidence"></span></p>
+      <p><span class="label">Details:</span> <span id="description"></span></p>
+    </div>
+  </div>
+
+  <script>
+    async function predictThreat() {
+      const text = document.getElementById("inputText").value;
+      if (!text.trim()) return;
+
+      const response = await fetch("/predict", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ text })
+      });
+
+      const data = await response.json();
+
+      if (data.error) {
+        alert(data.error);
+      } else {
+        document.getElementById("prediction").textContent = data.prediction;
+        document.getElementById("confidence").textContent = data.confidence;
+        document.getElementById("description").textContent = data.description;
+        document.getElementById("resultBox").style.display = "block";
+      }
+    }
+  </script>
+</body>
+</html>
