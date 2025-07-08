@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.log
+*.sqlite3
+*.db
+*.pkl
+*.h5
+*.keras
+*.env
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Virtual environments
+env/
+venv/
+ENV/
+*.egg-info/
+
+# VSCode
+.vscode/
+
+# Flask
+instance/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model artifacts
+tokenizer.pkl
+label_encoder.pkl
+cyber_threat_model.keras
